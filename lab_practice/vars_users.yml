@@ -1,0 +1,14 @@
+group_list:
+  - name: admins
+    gid: 2306
+  - name: devs
+    gid: 1994
+
+users_list:
+  - name: admin
+    group: admins
+    shell: /bin/bash
+  - name: devloper
+    group: devs
+    shell: /bin/bash
+

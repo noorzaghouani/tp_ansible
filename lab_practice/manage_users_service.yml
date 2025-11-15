@@ -1,0 +1,33 @@
+---
+- name: ex1
+  hosts: all
+  become: true
+  gather_facts: yes
+  vars_files:
+    - vars_users.yml
+  tasks:
+    - name: creation groups
+      group:
+        name: "{{ item.name }}"
+        gid: "{{ item.gid }}"
+        state:  present
+      loop: "{{ group_list }}"
+    - name: creation users
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.group }}"
+        shell: "{{ item.shell }}"
+      loop: "{{ users_list }}"
+    - name: installation service
+      package:
+        name: httpd
+        state: present
+      notify: redemarrer service
+
+  handlers:
+    - name: redemarrer service
+      service:
+        name: httpd
+        state: restarted
+
+

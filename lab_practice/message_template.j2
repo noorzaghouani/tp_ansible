@@ -1,0 +1,8 @@
+{{ ansible_managed }}
+
+Bienvenue {{ username }}
+{% if fruit == 'cerise' %}
+ vous aimez les cerises, c'est excellent!
+{% else %}
+ votre fruit préferé est "{{ fruit }}"
+{% endif %}

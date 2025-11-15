@@ -1,0 +1,15 @@
+---
+ - name: exercice2
+   hosts: all 
+   become: true
+   gather_facts: yes 
+   vars:
+      username: ansible  
+      fruit: pomme
+   tasks: 
+      - name: generation du fichier 
+        template:
+           src: message_template.j2
+           dest: /tmp/message_condition.txt 
+           mode: '0774'
+           
