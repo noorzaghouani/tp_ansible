@@ -1,0 +1,9 @@
+{{ ansible_managed }}
+
+{% if ansible_facts.hostname == 'ansible1' %}
+Sur la machine {{ ansible_facts.hostname }}
+la date d'aujourd-hui est {{ ansible_date_time.date }}
+L'horaire est: {{ ansible_date_time.hour }} : {{ ansible_date_time.minute }}
+{% else %}
+la date n'est pas configuré
+{% endif %}

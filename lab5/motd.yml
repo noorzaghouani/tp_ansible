@@ -1,0 +1,15 @@
+---
+  - name: playbook templete
+    hosts: all
+    become: true
+    gather_facts: yes
+    vars:
+        system_owner: "noor"
+    tasks: 
+      - name: copy templete
+        template:
+            src: motd.j2
+            dest: /etc/mot
+            owner: root
+            group: root
+            mode: '0644'

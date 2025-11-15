@@ -1,0 +1,17 @@
+---
+   - name: templete jinja2
+     hosts: all
+     become: yes 
+     tasks:
+       - name: modification fichier 
+         template: 
+             src: index.html.j2
+             dest: /var/www/html/index.html
+         notify: 
+             - redemarrer le service httpd
+     handlers:
+       - name: redemarrer le service httpd
+         service: 
+             name: httpd
+             state: restarted
+

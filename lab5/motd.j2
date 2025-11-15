@@ -1,0 +1,11 @@
+{{ ansible_managed }}
+
+{% if ansible_hostname == "ansible1" %}
+This is the system {{ ansible_fqdn }}
+this is a distribution 
+{{ ansible_facts['distribution'] }} system only use this system with permission
+Request permission from {{ system_owner }}
+{% else %}
+ERROR ! try again.
+{% endif %}
+
