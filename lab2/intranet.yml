@@ -1,0 +1,52 @@
+---
+  - name: playbook4
+    hosts: all
+    become: yes
+    gather_facts: no 
+    tasks: 
+         - name: task1 verification de l'installation du httpd et firewall 
+           package:
+              name:
+                - httpd
+                - firewalld
+              state: present 
+         - name: modification contenu 
+           copy: 
+              content: |
+                 <html>
+                 <head>
+                    <title>Mon Site</title>
+                 </head>
+                 <body>
+                            <h1>Bienvenue sur le site modifié</h1>
+                 </body>
+                 </html>
+              dest: /var/www/html/index.html 
+         - name:  demarrer et activer le service firewall
+           service: 
+              name: firewalld
+              state: started
+              enabled: yes 
+         - name: verification firewalld
+           command:
+            'firewall-cmd --add-service=http --permanent'
+         - name: reload 
+           command:   
+            'firewall-cmd --reload' 
+         - name: demarrer et activer le service httpd
+           service:
+              name: httpd
+              state: started
+              enabled: yes 
+
+  - name: play2
+    hosts: localhost
+    become: yes
+    tasks:
+         - name: verification acces au page web 
+           uri:
+              url: http://ansible1.example.com:80/index.html 
+              return_content: yes 
+           register: resultat1
+
+

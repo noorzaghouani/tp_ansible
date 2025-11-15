@@ -1,0 +1,36 @@
+---
+ - name: playbook2_TP2
+   hosts: all
+   become: yes
+   tasks: 
+      - name: planificatoion tache dans fichier date 
+        cron:
+            name: job1 
+            hour: '08-12/2,14-18/2'
+            minute: '02'
+            job: date >>/home/ansible/date
+
+      - name: planification tache dans un fichier user 
+        cron:
+            name: job2
+            minute: '*/1'
+            job: whoami >> /home/ansible/user
+
+      - name: planification tache reboot
+        cron:
+            name: job3
+            day: '1,15' 
+            hour: '02'
+            minute: '30'
+            job: reboot
+
+      - name: planification tache dans un fichier test 
+        cron: 
+            name: job4
+            day: '1-15'
+            weekday: '1-5'
+            hour:  '15-19'
+            minute: '00,15,30,45'
+            month: '07-09'
+            job: echo " hello" >> test  
+

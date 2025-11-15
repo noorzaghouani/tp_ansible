@@ -1,0 +1,48 @@
+---
+  - name: playbook3
+    hosts: all
+    become: yes
+    gather_facts: no 
+    tasks: 
+       - name: creation group 
+         group:
+            name: computestream
+            gid: 1234
+            state: present
+
+       - name: creation dossier 
+         file:
+            path: /exam/computestream
+            group: computestream
+            mode: '0770'
+            state: directory
+
+       - name: creation user
+         user: 
+            name: harry
+            comment: student
+            groups: computestream
+            append: yes 
+
+       - name: creation user natasha 
+         user: 
+            name: natasha 
+            comment: student2
+            shell: /sbin/nologin 
+
+       - name: skel
+         copy: 
+            src: /etc/services
+            dest: /etc/skel/services
+            owner: root
+            group: root
+            mode: 0774
+
+       - name: modification content 
+         lineinfile:
+            path: /etc/sudoers
+            regexp: '^ #%wheel '
+            line: '%wheel ALL=(ALL) NOPSSWD:ALL'
+            state: present 
+
+
