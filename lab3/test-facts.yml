@@ -1,0 +1,39 @@
+---
+  - name: playbook facts
+    hosts: ansible1.example.com
+    become: true
+    gather_facts: yes
+    tasks: 
+         - name: copier report in ansible1
+           copy:
+             src: ~/lab3/report
+             dest: /home/ansible1/report 
+             owner: ansible
+             group: ansible
+             mode: '0644'
+         - name: modifier la premiere ligne 
+           lineinfile:
+             path: /home/ansible1/report
+             regexp: '^Host='
+             line: 'Host= {{ ansible_facts.hostname }}'
+         - name:  modifier la deuxieme ligne
+           lineinfile:
+             path: /home/ansible1/report 
+             regexp: '^Memory='
+             line: 'Memory= {{ ansible_facts.memtotal_mb }} MB'
+         - name: modifier la troixieme ligne
+           lineinfile: 
+             path: /home/ansible1/report
+             regexp: '^Distribution='
+             line: 'Distribution={{ ansible_facts.distribution }}'
+         - name: modifier la quatrieme ligne
+           lineinfile: 
+             path: /home/ansible1/report
+             regexp: '^Disk_size='
+             line: 'Disk_size={{ ansible_facts.mounts }}'
+
+
+
+
+
+

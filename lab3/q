@@ -1,0 +1,15 @@
+---
+  - name: playbook gatherfacts motd
+    hosts: all
+    become: true 
+    gather_facts: yes 
+    tasks: 
+         - name:  modification fichier 
+           copy:
+             dest: /etc/motd
+             content: |
+               Bonjour.
+               Ce message vous parvient de la machine {{ ansible_facts.hostname }}
+               Mon addresse IPv4 est {{ ansible_facts.default.ipv4.address }}
+
+               Mon serveur dns est {{ ansible_facts.dns.nameservers }} 
