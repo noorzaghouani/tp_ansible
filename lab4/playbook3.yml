@@ -1,0 +1,20 @@
+---
+  - name: creation user sous condition 
+    hosts: all 
+    become: true 
+    gather_facts: yes
+    tasks:
+       - name: creation ansible1
+         user:
+            name: ansible1
+            state: present 
+            shell: /bin/bash
+         when: ansible_facts['hostname'] == 'ansible1'
+
+       - name: creation ansible2
+         user:
+            name: ansible2
+            state: present
+            shell: /bin/bash
+         when: ansible_facts['hostname'] == 'ansible2'
+

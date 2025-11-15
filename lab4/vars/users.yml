@@ -1,0 +1,19 @@
+---
+list_of_users:
+  - name: user1
+    uid: 1320
+    comment: "student1"
+    groups: "wheel"
+    shell: "/bin/nologin"
+
+  - name: user2
+    uid: 1322
+    comment: "student2"
+    groups: "wheel"
+    shell: "/bin/sh"
+
+  - name: user3
+    uid: 1355
+    comment: "student3"
+    groups: "wheel"
+    shell: "/bin/bash"

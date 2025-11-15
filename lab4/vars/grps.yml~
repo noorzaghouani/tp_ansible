@@ -1,0 +1,13 @@
+list_of_groups:
+  - name: rhce
+    state: present
+    gid: 3500
+
+  - name: redhat 
+    state: present
+    gid: 4000
+
+  - name: linux 
+    state: present 
+    gid: 5000
+    

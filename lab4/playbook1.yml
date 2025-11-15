@@ -1,0 +1,24 @@
+---
+- name: playbook1 Ajout user et groups
+  hosts: all
+  become: true
+  
+  vars_files:
+    - vars/users.yml
+    - vars/grps.yml
+
+  tasks:
+    - name: Ajout groups
+      group:
+        name: "{{ item.name }}"
+        gid: "{{ item.gid }}"
+      loop: "{{ list_of_groups }}"
+
+    - name: Ajout users
+      user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid }}"
+        comment: "{{ item.comment }}"
+        groups: "{{ item.groups }}"
+        shell: "{{ item.shell }}"
+      loop: "{{ list_of_users }}"

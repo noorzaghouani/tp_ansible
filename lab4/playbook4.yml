@@ -1,0 +1,16 @@
+---
+  - name: disk partition 
+    hosts: ansible1.example.com
+    gather_facts: yes
+    become: true 
+    tasks: 
+       - name: creation du partition en nvme disk 
+         parted:
+           device: /dev/nvme0n2
+           number: 2
+           state: present
+           part_type: primary  
+           part_start: 0%
+           part_end: 1GiB 
+           fs_type: ext4
+         when: ansible_devices.nvme0n2 is defined

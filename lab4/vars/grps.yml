@@ -1,0 +1,10 @@
+---
+list_of_groups:
+  - name: wheel
+    gid: 3000
+
+  - name: redhat
+    gid: 4000
+
+  - name: linux
+    gid: 5000

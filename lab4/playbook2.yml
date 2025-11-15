@@ -1,0 +1,38 @@
+---
+  - name: playbook2 creation des fichiers 
+    hosts: ansible1.example.com
+    become: true
+
+    tasks:
+       - name: creation user 
+         user:
+           name: "{{ item }}"
+           state: present 
+         loop: 
+            - user1
+            - user2
+            - user3
+              
+       - name: ajout fichier1
+         copy:
+           content: "contenu fich1"
+           dest: /tmp/fich1
+           owner: user1
+           group: user1
+           mode: "0664"
+       - name: ajout fichier2
+         copy:
+           content: "contenu fich2"
+           dest: /tmp/fich2
+           owner: user2
+           group: user2
+           mode: "0600"
+       - name: ajout fichier3
+         copy:
+           content: "contenu fich3"
+           dest: /tmp/fich3
+           owner: user3
+           group: user3
+           mode: "0644"
+          
+
